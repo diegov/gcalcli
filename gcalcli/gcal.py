@@ -263,7 +263,7 @@ class GoogleCalendarInterface:
         """Shift the day number if we're doing cal monday, or cal_weekend is
         false, since that also means we're starting on day 1
         """
-        if self.options['cal_monday'] or not self.options['cal_weekend']:
+        if not self.options['cal_sunday'] or not self.options['cal_weekend']:
             day_num -= 1
             if day_num < 0:
                 day_num = 6
@@ -453,7 +453,7 @@ class GoogleCalendarInterface:
         days = 7 if self.options['cal_weekend'] else 5
         # Get the localized day names... January 1, 2001 was a Monday
         day_names = [date(2001, 1, i + 1).strftime('%A') for i in range(days)]
-        if not self.options['cal_monday'] or not self.options['cal_weekend']:
+        if self.options['cal_sunday'] or not self.options['cal_weekend']:
             day_names = day_names[6:] + day_names[:6]
 
         def build_divider(left, center, right):
@@ -1250,7 +1250,7 @@ class GoogleCalendarInterface:
             end = start.replace(month=end_month, year=end_year)
             days_in_month = (end - start).days
             offset_days = int(start.strftime('%w'))
-            if self.options['cal_monday']:
+            if not self.options['cal_sunday']:
                 offset_days -= 1
                 if offset_days < 0:
                     offset_days = 6

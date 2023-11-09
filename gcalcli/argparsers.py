@@ -185,8 +185,8 @@ def get_cal_query_parser():
     cal_query_parser = argparse.ArgumentParser(add_help=False)
     cal_query_parser.add_argument('start', type=str, nargs='?')
     cal_query_parser.add_argument(
-            '--monday', action='store_true', dest='cal_monday', default=False,
-            help='Start the week on Monday')
+            '--sunday', action='store_true', dest='cal_sunday', default=False,
+            help='Start the week on Sunday')
     cal_query_parser.add_argument(
             '--noweekend', action='store_false', dest='cal_weekend',
             default=True,  help='Hide Saturday and Sunday')
